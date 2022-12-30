@@ -37,8 +37,7 @@ public class StateHandler extends MessageHandler {
             state.setLight(message.getBuffer());
         }
 
-        String states = info.isRichStates() ? state.getRichStates() : state.getDefaultStates();
-        info.setStates(states);
+        state.updateStates(info);
     }
 
     private void sendAckLog(short id) throws IOException {
