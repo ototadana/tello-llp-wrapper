@@ -1,5 +1,7 @@
 package com.xpfriend.tydrone.telloio.handlers;
 
+import com.xpfriend.tydrone.core.Info;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -185,12 +187,35 @@ public class State {
         wifi = buffer.get();
         byte wil = buffer.get();  // Wifi Interference level (percentage)
     }
+    
+    public void updateStates(Info info) {
+        info.setState("bat", Byte.toString(bat));
+        info.setState("lit", Byte.toString(lit));
+        info.setState("wifi", Byte.toString(wifi));
+        info.setState("yaw", Integer.toString(yaw));
+        if (!info.isRichStates()) {
+            return;
+        }
 
-    public String getDefaultStates() {
-        return String.format("bat:%d;lit:%d;wifi:%d;yaw:%d", bat, lit, wifi, yaw);
-    }
+        info.setState("pitch", Integer.toString(pitch));
+        info.setState("roll", Integer.toString(roll));
+        info.setState("h", Short.toString(h));
+        info.setState("time", Short.toString(time));
 
-    public String getRichStates() {
-        return "bat:" + bat + ";" + "lit:" + lit + ";" + "wifi:" + wifi + ";" + "yaw:" + yaw + ";" + "pitch:" + pitch + ";" + "roll:" + roll + ";" + "h:" + h + ";" + "time:" + time + ";" + "ax:" + ax + ";" + "ay:" + ay + ";" + "az:" + az + ";" + "gx:" + gx + ";" + "gy:" + gy + ";" + "gz:" + gz + ";" + "px:" + px + ";" + "py:" + py + ";" + "pz:" + pz + ";" + "vx:" + vx + ";" + "vy:" + vy + ";" + "vz:" + vz + ";" + "vn:" + vn + ";" + "ve:" + ve + ";" + "vd:" + vd + ";";
+        info.setState("ax", Float.toString(ax));
+        info.setState("ay", Float.toString(ay));
+        info.setState("az", Float.toString(az));
+        info.setState("gx", Float.toString(gx));
+        info.setState("gy", Float.toString(gy));
+        info.setState("gz", Float.toString(gz));
+        info.setState("px", Float.toString(px));
+        info.setState("py", Float.toString(py));
+        info.setState("pz", Float.toString(pz));
+        info.setState("vx", Short.toString(vx));
+        info.setState("vy", Short.toString(vy));
+        info.setState("vz", Short.toString(vz));
+        info.setState("vn", Float.toString(vn));
+        info.setState("ve", Float.toString(ve));
+        info.setState("vd", Float.toString(vd));
     }
 }

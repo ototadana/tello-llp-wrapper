@@ -1,14 +1,17 @@
 package com.xpfriend.tydrone.core;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Info {
+    private final Map<String, String> states = new HashMap<>();
+    private final Map<String, Boolean> enabled = new HashMap<>();
     private byte[] image;
     private boolean active = true;
-    private String states;
     private String command;
     private String notice;
     private String sentCommand;
     private boolean recording = false;
-
     @SuppressWarnings("rawtypes")
     private VideoFrame frame;
     private boolean richStates;
@@ -30,11 +33,28 @@ public class Info {
     }
 
     public String getStates() {
-        return states;
+        StringBuilder sb = new StringBuilder();
+        states.forEach((k, v) -> sb.append(k).append(':').append(v).append(';'));
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        return sb.toString();
     }
 
-    public void setStates(String states) {
-        this.states = states;
+    public String getState(String key) {
+        return states.get(key);
+    }
+
+    public void setState(String key, String value) {
+        states.put(key, value);
+    }
+
+    public void setEnabled(String name, boolean enabled) {
+        this.enabled.put(name, enabled);
+    }
+
+    public boolean isEnabled(String name) {
+        return this.enabled.getOrDefault(name, false);
     }
 
     public boolean isRecording() {

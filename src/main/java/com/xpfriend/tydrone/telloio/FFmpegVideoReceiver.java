@@ -35,9 +35,7 @@ public class FFmpegVideoReceiver extends Startable {
                         continue;
                     }
 
-                    if (info.isRecording()) {
-                        info.setFrame(new VideoFrame<>(frame.clone()));
-                    }
+                    info.setFrame(new VideoFrame<>(frame.clone()));
 
                     if (!info.hasImage()) {
                         info.setImage(toByteArray(frame));

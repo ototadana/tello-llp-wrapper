@@ -37,6 +37,19 @@ public abstract class Facade implements Closeable {
         return info.getStates();
     }
 
+    public String getState(String key) {
+        return info.getState(key);
+    }
+
+    public void setEnabled(String name, boolean enabled) {
+        info.setEnabled(name, enabled);
+    }
+
+    public boolean isEnabled(String name) {
+        return info.isEnabled(name);
+    }
+
+
     public byte[] pickImage() {
         return info.pickImage();
     }
