@@ -84,6 +84,7 @@ public class FFmpegVideoRecorder extends Startable {
     }
 
     private FFmpegFrameRecorder startRecorder(File outputFile) throws FFmpegFrameRecorder.Exception {
+        frameNumber = 0;
         FFmpegFrameRecorder recorder = new FFmpegFrameRecorder(outputFile, 960, 720, 0);
         recorder.setVideoQuality(1);
         recorder.setTimestamp(0);
